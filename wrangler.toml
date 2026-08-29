@@ -1,0 +1,9 @@
+name = "web-1v"
+account_id = "YOUR_ACCOUNT_ID"
+compatibility_date = "2026-08-29"
+workers_dev = true
+type = "javascript"
+
+[site]
+  bucket = "./"
+  entry-point = "workers-site"
