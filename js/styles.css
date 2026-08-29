@@ -327,6 +327,63 @@ body::before {
   transform: translateY(-3px);
 }
 
+/* ---------- spotify now-playing card ---------- */
+
+.spotify-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 20px;
+  padding: 10px 14px;
+  border: 1px solid var(--panel-border);
+  border-radius: 12px;
+  text-decoration: none;
+  color: inherit;
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.spotify-card:hover {
+  border-color: #1db954;
+  transform: translateY(-2px);
+}
+
+.spotify-art {
+  width: 44px;
+  height: 44px;
+  border-radius: 6px;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.spotify-info {
+  min-width: 0;
+  text-align: left;
+  flex: 1;
+}
+
+.spotify-track {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.spotify-artist {
+  font-size: 0.75rem;
+  color: var(--text-dim);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.spotify-icon {
+  color: #1db954;
+  font-size: 1.1rem;
+  flex-shrink: 0;
+}
+
 /* ---------- view counter ---------- */
 
 #view-count {
