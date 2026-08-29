@@ -1,0 +1,360 @@
+/* ============================================
+   AezraPuissant — profile landing page styles
+   ============================================ */
+
+:root {
+  --bg: #05050a;
+  --panel: transparent;
+  --panel-border: rgba(255, 255, 255, 0.12);
+  --text: #e8e8f5;
+  --text-dim: #9a9ab5;
+  --accent-a: #5865f2;   /* discord blurple */
+  --accent-b: #5865f2;   /* discord blurple (was violet) */
+  --accent-c: #ff2e6e;   /* glitch red */
+  --shadow: rgba(88, 101, 242, 0.35);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Poppins', sans-serif;
+  overflow-x: hidden;
+}
+
+/* ---------- background video ---------- */
+
+#bg-video {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  transform: translate(-50%, -50%);
+  object-fit: cover;
+  z-index: -2;
+  filter: brightness(0.45) saturate(1.1);
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(circle at 50% 30%, rgba(88, 101, 242, 0.12), transparent 60%),
+              linear-gradient(180deg, rgba(0,0,0,0.55), rgba(0,0,0,0.85));
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* ---------- click-to-enter overlay ---------- */
+
+#enterxyz {
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #000;
+  cursor: pointer;
+}
+
+#enterxyz span {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+  font-size: clamp(1.5rem, 6vw, 3rem);
+  letter-spacing: 0.35em;
+  color: var(--text);
+  padding: 0.6em 1em;
+  border: 1px solid var(--panel-border);
+  border-radius: 4px;
+  animation: pulseGlow 1.8s ease-in-out infinite;
+}
+
+@keyframes pulseGlow {
+  0%, 100% { box-shadow: 0 0 12px var(--shadow); opacity: 0.85; }
+  50%      { box-shadow: 0 0 28px var(--shadow); opacity: 1; }
+}
+
+/* ---------- volume control ---------- */
+
+.volume-control {
+  position: fixed;
+  top: 18px;
+  right: 18px;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--panel);
+  border: 1px solid var(--panel-border);
+  backdrop-filter: blur(10px);
+  padding: 8px 12px;
+  border-radius: 999px;
+}
+
+.volume-control #volume-icon {
+  color: var(--text-dim);
+  font-size: 0.95rem;
+  cursor: pointer;
+}
+
+.volume-control input[type="range"] {
+  -webkit-appearance: none;
+  width: 90px;
+  height: 3px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, var(--accent-a), var(--accent-b));
+  outline: none;
+}
+
+.volume-control input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--text);
+  box-shadow: 0 0 6px var(--shadow);
+  cursor: pointer;
+}
+
+.volume-control input[type="range"]::-moz-range-thumb {
+  width: 12px;
+  height: 12px;
+  border: none;
+  border-radius: 50%;
+  background: var(--text);
+  box-shadow: 0 0 6px var(--shadow);
+  cursor: pointer;
+}
+
+/* ---------- profile card ---------- */
+
+.profile-container {
+  position: relative;
+  z-index: 5;
+  width: min(420px, 88vw);
+  margin: 12vh auto 0;
+  padding: 36px 28px 30px;
+  background: var(--panel);
+  border: 1px solid var(--panel-border);
+  border-radius: 18px;
+  text-align: center;
+}
+
+.profile-avatar {
+  position: relative;
+  display: inline-block;
+}
+
+.profile-avatar img {
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid transparent;
+  background: linear-gradient(var(--panel), var(--panel)) padding-box,
+              linear-gradient(135deg, var(--accent-a), var(--accent-b)) border-box;
+  box-shadow: 0 0 24px var(--shadow);
+  transition: transform 0.25s ease;
+}
+
+.profile-avatar img:hover {
+  transform: scale(1.06) rotate(-2deg);
+}
+
+.status-dot {
+  position: absolute;
+  bottom: 4px;
+  right: 4px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #747f8d;
+  border: 3px solid #05050a;
+}
+
+.status-dot.online  { background: #23a55a; }
+.status-dot.idle    { background: #f0b232; }
+.status-dot.dnd     { background: #f23f43; }
+.status-dot.offline { background: #80848e; }
+
+.profile-username {
+  margin-top: 18px;
+  font-weight: 700;
+  font-size: 1.4rem;
+  word-break: break-word;
+}
+
+/* gradient text */
+.gradient-text {
+  background: linear-gradient(90deg, var(--accent-a), var(--accent-b), var(--accent-c));
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: shimmer 4s linear infinite;
+}
+
+@keyframes shimmer {
+  to { background-position: 200% center; }
+}
+
+/* sparkle overlay: subtle animated highlight sweep */
+.sparkle-overlay {
+  position: relative;
+}
+
+.sparkle-overlay::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(100deg, transparent 30%, rgba(255,255,255,0.55) 45%, transparent 60%);
+  background-size: 250% 100%;
+  mix-blend-mode: overlay;
+  animation: sparkleSweep 3.2s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes sparkleSweep {
+  0%   { background-position: 150% 0; }
+  60%, 100% { background-position: -50% 0; }
+}
+
+/* glitch effect, driven by data-text attribute */
+.glitch {
+  position: relative;
+  display: inline-block;
+}
+
+.glitch::before,
+.glitch::after {
+  content: attr(data-text);
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  overflow: hidden;
+  background: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.glitch::before {
+  background-image: linear-gradient(90deg, var(--accent-c), var(--accent-c));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: var(--accent-c);
+  color: var(--accent-c);
+  clip-path: inset(0 0 55% 0);
+  animation: glitchTop 2.6s infinite linear alternate-reverse;
+  opacity: 0.85;
+}
+
+.glitch::after {
+  -webkit-text-fill-color: var(--accent-a);
+  color: var(--accent-a);
+  clip-path: inset(55% 0 0 0);
+  animation: glitchBottom 2.2s infinite linear alternate-reverse;
+  opacity: 0.85;
+}
+
+@keyframes glitchTop {
+  0%   { transform: translate(0, 0); }
+  20%  { transform: translate(-2px, -1px); }
+  40%  { transform: translate(2px, 1px); }
+  60%  { transform: translate(-1px, 1px); }
+  80%  { transform: translate(1px, -1px); }
+  100% { transform: translate(0, 0); }
+}
+
+@keyframes glitchBottom {
+  0%   { transform: translate(0, 0); }
+  20%  { transform: translate(2px, 1px); }
+  40%  { transform: translate(-2px, -1px); }
+  60%  { transform: translate(1px, -1px); }
+  80%  { transform: translate(-1px, 1px); }
+  100% { transform: translate(0, 0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .glitch::before, .glitch::after, .sparkle-overlay::after, #enterxyz span {
+    animation: none;
+  }
+}
+
+/* chip / icon under username */
+.profile-container > h1.bx {
+  margin: 14px 0 2px;
+  font-size: 1.6rem;
+  color: var(--text-dim);
+}
+
+#stylesheet {
+  margin: 0 0 14px;
+  font-size: 0.8rem;
+  color: var(--text-dim);
+  letter-spacing: 0.05em;
+}
+
+/* ---------- social links ---------- */
+
+.profile-links {
+  display: flex;
+  justify-content: center;
+  gap: 18px;
+  margin-top: 6px;
+}
+
+.profile-links a {
+  color: var(--text-dim);
+  font-size: 1.3rem;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.profile-links a:hover {
+  color: var(--text);
+  transform: translateY(-3px);
+}
+
+/* ---------- view counter ---------- */
+
+#view-count {
+  margin-top: 22px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.8rem;
+  color: var(--text-dim);
+  border-top: 1px solid var(--panel-border);
+  padding-top: 12px;
+  width: 100%;
+  justify-content: center;
+}
+
+#view-count-number {
+  color: var(--text);
+  font-weight: 600;
+}
+
+/* ---------- responsive ---------- */
+
+@media (max-width: 480px) {
+  .profile-container {
+    margin-top: 16vh;
+    padding: 28px 20px 24px;
+  }
+  .volume-control input[type="range"] {
+    width: 60px;
+  }
+}
